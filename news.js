@@ -14,16 +14,15 @@ function ajouter_recherche()
 
 function supprimer_recherche(e)
 {
-	var parent = e.parentNode;
-	recherches.splice(recherches.indexOf(parent.firstChild.innerHTML));
-	e.parentNode.remove();
+	recherches.splice(recherches.indexOf($(e).parent().first().text()));
+	$(e).parent().remove();
 	$.cookie("recherches", JSON.stringify({recherches}), { expires: 1000 });
 }
 
 
 function selectionner_recherche(e)
 {
-	var text = e.parentNode.firstChild.innerHTML;
+	var text = $(e).parent().first().text();
 	$("#zone_saisie").val(text);
 	recherche_courante = text;
 }
