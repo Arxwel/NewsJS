@@ -35,7 +35,13 @@ function init()
 
 function rechercher_nouvelles()
 {
-
+	$('#resultats').empty();
+	$('#wait').css("display", "block");
+	$.ajax({
+		url : ,
+		type : 'GET',
+		data :
+	});
 
 }
 
