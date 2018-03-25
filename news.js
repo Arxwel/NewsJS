@@ -31,17 +31,20 @@ function selectionner_recherche(e)
 function init()
 {
 	if (!!$.cookie('recherches')) {
-			alert($.cookie('recherches'));
+			console.log("init : " + $.cookie('recherches'));
 			recherches = JSON.parse($.cookie('recherches')).recherches;
-			for (var i = 0, len = recherches.length; i < len; i++) {
-  				$("#recherches-stockees").html($("#recherches-stockees").html() + "<p class=\"titre-recherche\"><label onclick=\"selectionner_recherche(this)\">" + recherches[i] + "</label><img src=\"croix30.jpg\" class=\"icone-croix\" onclick=\"supprimer_recherche(this)\"/> </p>");
-			}
+			$.each(recherches, function(index, value) {
+				$("#recherches-stockees").html($("#recherches-stockees").html() + "<p class=\"titre-recherche\"><label onclick=\"selectionner_recherche(this)\">" + recherches[index] + "</label><img src=\"croix30.jpg\" class=\"icone-croix\" onclick=\"supprimer_recherche(this)\"/> </p>");
+			});
 	}
 }
 
 
 function rechercher_nouvelles()
 {
+	if(!!recherche_courante) {
+		recherche_courante = $("#zone_saisie").val();
+	}
 	$('#resultats').empty();
 	$('#wait').css("display", "block");
 	$.ajax({
@@ -52,29 +55,48 @@ function rechercher_nouvelles()
 		success : maj_resultats
 	});
 
+
 }
 
 
 function maj_resultats(res)
 {
 	$('#wait').css("display", "none");
-	var t = JSON.parse(res);
-	for (var i = 0, len = t.length; i < len; i++) {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(t[i].url) + "\" target=\"_blank\">" + decodeEntities(t[i].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(t[i].date)) + "</span><span class=\"action_news\" onclick=\"sauver_nouvelle(this)\"><img onclick=\"sauver_nouvelle(this)\" src=\"horloge15.jpg\"/></span></p>")
-	}
+	var tableau = JSON.parse(res);
+	$.each(tableau, function(index, value) {
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"sauver_nouvelle(this)\"><img onclick=\"sauver_nouvelle(this)\" src=\"horloge15.jpg\"/></span></p>")
+	});
 
 }
 
 
 function sauver_nouvelle(e)
 {
-	alert(e);
+// 	Fonctionne mais à revoir je pense
+	var parent = $(e).parents(".titre_result");
 	$(e).attr('src', 'disk15.jpg');
+	$(e).attr('onclick', 'supprimer_nouvelle(this)');
 	$(e).parent().attr('onclick', 'supprimer_nouvelle(this)');
+	var nouvelle = {titre: $(parent).children(".titre_news").html(),date: $(parent).children(".date_news").html(), url: $(parent).children(".titre_news").attr("href")};
+	//console.log("Sauver nouvelle : " + nouvelle.titre + " " + nouvelle.date + " " + nouvelle.url);
+	if(recherche_courante_news.indexOf(nouvelle) == -1) {
+		recherche_courante_news.push(nouvelle);
+		$.cookie(recherche_courante, JSON.stringify({recherche_courante_news}), { expires: 1000 });
+	}
 }
 
 
 function supprimer_nouvelle(e)
 {
-
+	// Ne fonctionne pas
+	alert(recherche_courante_news.indexOf(nouvelle));
+	var parent = $(e).parents(".titre_result");
+	$(e).attr('src', 'horloge15.jpg');
+	$(e).parent().attr('onclick', 'sauver_nouvelle(this)');
+	$(e).attr('onclick', 'sauver_nouvelle(this)');
+	var nouvelle = {titre: $(parent).children(".titre_news").html(),date: $(parent).children(".date_news").html(), url: $(parent).children(".titre_news").attr("href")};
+	if(recherche_courante_news.indexOf(nouvelle) != -1) {
+		recherche_courante_news.splice(recherche_courante_news.indexOf(nouvelle));
+		$.cookie(recherche_courante, JSON.stringify({recherche_courante_news}), { expires: 1000 });
+	}
 }
