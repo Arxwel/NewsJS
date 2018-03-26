@@ -95,8 +95,11 @@ function supprimer_nouvelle(e)
 	$(e).parent().attr('onclick', 'sauver_nouvelle(this)');
 	$(e).attr('onclick', 'sauver_nouvelle(this)');
 	var nouvelle = {titre: $(parent).children(".titre_news").html(),date: $(parent).children(".date_news").html(), url: $(parent).children(".titre_news").attr("href")};
+	alert(recherche_courante_news.indexOf(nouvelle));
 	if(recherche_courante_news.indexOf(nouvelle) != -1) {
+		alert(recherche_courante_news);
 		recherche_courante_news.splice(recherche_courante_news.indexOf(nouvelle));
+		alert(recherche_courante_news);
 		$.cookie(recherche_courante, JSON.stringify({recherche_courante_news}), { expires: 1000 });
 	}
 }
