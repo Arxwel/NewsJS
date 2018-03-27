@@ -42,7 +42,7 @@ function init()
 
 function rechercher_nouvelles()
 {
-	if(!!recherche_courante) {
+	if(recherche_courante === undefined) {
 		recherche_courante = $("#zone_saisie").val();
 	}
 	$('#resultats').empty();
@@ -64,21 +64,19 @@ function maj_resultats(res)
 	$('#wait').css("display", "none");
 	var tableau = JSON.parse(res);
 	$.each(tableau, function(index, value) {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"sauver_nouvelle(this)\"><img onclick=\"sauver_nouvelle(this)\" src=\"horloge15.jpg\"/></span></p>")
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"sauver_nouvelle(this)\"><img src=\"horloge15.jpg\"/></span></p>")
 	});
-
 }
 
 
 function sauver_nouvelle(e)
 {
 // 	Fonctionne mais à revoir je pense
-	var parent = $(e).parents(".titre_result");
-	$(e).attr('src', 'disk15.jpg');
-	$(e).attr('onclick', 'supprimer_nouvelle(this)');
-	$(e).parent().attr('onclick', 'supprimer_nouvelle(this)');
+	var parent = $(e).parent();
+	$(e).children(":first").attr("src", "disk15.jpg");
+	$(e).attr("onclick", "supprimer_nouvelle(this)");
+
 	var nouvelle = {titre: $(parent).children(".titre_news").html(),date: $(parent).children(".date_news").html(), url: $(parent).children(".titre_news").attr("href")};
-	//console.log("Sauver nouvelle : " + nouvelle.titre + " " + nouvelle.date + " " + nouvelle.url);
 	if(recherche_courante_news.indexOf(nouvelle) == -1) {
 		recherche_courante_news.push(nouvelle);
 		$.cookie(recherche_courante, JSON.stringify({recherche_courante_news}), { expires: 1000 });
@@ -88,14 +86,13 @@ function sauver_nouvelle(e)
 
 function supprimer_nouvelle(e)
 {
-	// Ne fonctionne pas
-	alert(recherche_courante_news.indexOf(nouvelle));
-	var parent = $(e).parents(".titre_result");
-	$(e).attr('src', 'horloge15.jpg');
-	$(e).parent().attr('onclick', 'sauver_nouvelle(this)');
-	$(e).attr('onclick', 'sauver_nouvelle(this)');
+	var parent = $(e).parent();
+	alert(parent);
+	$(e).children(":first").attr("src", "horloge15.jpg");
+	$(e).attr("onclick", "sauver_nouvelle(this)");
+
 	var nouvelle = {titre: $(parent).children(".titre_news").html(),date: $(parent).children(".date_news").html(), url: $(parent).children(".titre_news").attr("href")};
-	alert(recherche_courante_news.indexOf(nouvelle));
+
 	if(recherche_courante_news.indexOf(nouvelle) != -1) {
 		alert(recherche_courante_news);
 		recherche_courante_news.splice(recherche_courante_news.indexOf(nouvelle));
