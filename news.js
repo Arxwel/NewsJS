@@ -19,7 +19,7 @@ function supprimer_recherche(e)
 	$(e).parent().remove();
 	$.cookie("recherches", JSON.stringify({recherches}), { expires: 1000 });
 }
-*/
+
 
 function selectionner_recherche(e)
 {
@@ -34,9 +34,9 @@ function selectionner_recherche(e)
 	}
 
 }
+*/
 
-
-function init()
+/*function init()
 {
 	if (!!$.cookie('recherches')) {
 			console.log("init : " + $.cookie('recherches'));
@@ -46,8 +46,8 @@ function init()
 			});
 	}
 }
-
-
+*/
+/*
 function rechercher_nouvelles()
 {
 	if(recherche_courante === undefined) {
@@ -70,8 +70,8 @@ function rechercher_nouvelles()
 
 
 }
-
-
+*/
+/*
 function maj_resultats(res)
 {
 	$('#wait').css("display", "none");
@@ -84,7 +84,7 @@ function maj_resultats(res)
 		}
 	});
 }
-
+*/
 /*
 function sauver_nouvelle(e)
 {
