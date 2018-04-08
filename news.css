@@ -48,7 +48,7 @@ body
 }
 
 
-#recherches 
+#recherches
 {
 	vertical-align:top;
 	margin-left:1%;
@@ -58,7 +58,7 @@ body
 	padding:1px;
 	border: 1px solid black;
 	border-radius: 10px;
-	
+
 }
 
 #wait
@@ -156,6 +156,17 @@ input[type="text"]
 
 #banniere
 {
-	width:99%;	
+	width:99%;
 	height:200px;
+}
+
+#accordeon .titre {
+    background: black;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+#accordeon .titre .ui-state-active::after {
+	content: "^";
 }

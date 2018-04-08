@@ -19,9 +19,10 @@ controller.selectionner_recherche = function(recherche) {
 }
 
 controller.init = function() {
-	controller.autocomplete();
 	model.init();
 	view.init();
+	controller.autocomplete();
+	controller.accordeon();
 }
 
 controller.maj_resultats = function(res) {
@@ -56,5 +57,12 @@ controller.ecoute_clavier = function(event) {
 
 controller.autocomplete = function() {
 	view.autocomplete();
-	controller.rechercher_nouvelles();
+	//controller.rechercher_nouvelles();
+}
+
+controller.accordeon = function() {
+	$("#accordeon").accordion({
+        collapsible: true,
+        action :false
+    });
 }

@@ -17,7 +17,7 @@ model.supprimer_recherche = function (recherche)
 
 model.init = function ()
 {
-	if ($.cookie('recherches') != "") {
+	if ($.cookie('recherches') !== undefined) {
 			console.log($.cookie('recherches'));
 			model.recherches = JSON.parse($.cookie('recherches'));
 	}
@@ -25,7 +25,7 @@ model.init = function ()
 
 model.selectionner_recherche = function(recherche) {
     model.recherche_courante = recherche;
-    if($.cookie(model.recherche_courante) != "") {
+    if($.cookie(model.recherche_courante) !== undefined) {
   		model.recherche_courante_news = JSON.parse($.cookie(model.recherche_courante));
     }
 }
@@ -54,7 +54,9 @@ model.supprimer_nouvelle = function (nouvelle)
 }
 
 model.get_cookie_recherche = function() {
+	if($.cookie('recherches') !== undefined) {
 		model.recherches = JSON.parse($.cookie('recherches'));
+	}
 		return model.recherches;
 }
 
