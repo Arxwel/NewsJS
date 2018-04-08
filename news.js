@@ -2,7 +2,7 @@ var recherches=[];//tableau contenant des chaines de caracteres correspondant au
 var recherche_courante;// chaine de caracteres correspondant a la recherche courante
 var recherche_courante_news=[]; // tableau d'objets de type resultats (avec titre, date et url)
 
-/*
+
 function ajouter_recherche()
 {
 	if(recherches.indexOf($("#zone_saisie").val()) == -1) {
@@ -34,9 +34,9 @@ function selectionner_recherche(e)
 	}
 
 }
-*/
 
-/*function init()
+
+function init()
 {
 	if (!!$.cookie('recherches')) {
 			console.log("init : " + $.cookie('recherches'));
@@ -46,8 +46,7 @@ function selectionner_recherche(e)
 			});
 	}
 }
-*/
-/*
+
 function rechercher_nouvelles()
 {
 	if(recherche_courante === undefined) {
@@ -70,8 +69,7 @@ function rechercher_nouvelles()
 
 
 }
-*/
-/*
+
 function maj_resultats(res)
 {
 	$('#wait').css("display", "none");
@@ -85,7 +83,7 @@ function maj_resultats(res)
 	});
 }
 */
-/*
+
 function sauver_nouvelle(e)
 {
 // 	Fonctionne mais à revoir je pense
@@ -115,4 +113,3 @@ function supprimer_nouvelle(e)
 		$.cookie(recherche_courante, JSON.stringify({recherche_courante_news}), { expires: 1000 });
 	}
 }
-*/

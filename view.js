@@ -2,7 +2,7 @@ var view ={};
 
 view.ajouter_recherche = function(saisie)
 {
-  $("#recherches-stockees").html($("#recherches-stockees").html() + '<p class=\"titre-recherche\"><label onclick=\"controller.selectionner_recherche(this)\">' + $("#zone_saisie").val() + '</label><img src=\"croix30.jpg\" class=\"icone-croix\" onclick=\"controller.supprimer_recherche(this)\"/> </p>');
+  $("#recherches-stockees").html($("#recherches-stockees").html() + '<p class=\"titre-recherche\"><label onclick=\"controller.selectionner_recherche(this)\">' + saisie + '</label><img src=\"croix30.jpg\" class=\"icone-croix\" onclick=\"controller.supprimer_recherche(this)\"/> </p>');
 }
 
 view.supprimer_nouvelle = function(element)
@@ -48,21 +48,19 @@ view.get_saisie = function() {
   return $("#zone_saisie").val();
 }
 
-view.selectionner_recherche = function(recherche) {
-  $("#zone_saisie").val(model.get_recherche_courante());
-}
-
-view.afficher_nouvelles_sauvegardees = function(recherche) {
+view.afficher_nouvelles_sauvegardees = function() {
   var recherches_courantes = model.get_recherches_courantes_news();
-  $.each(recherches_courantes, function(index, value) {
-    $('#resultats').html($('#resultats').html() + '<p class=\"titre_result\"><a class=\"titre_news\" href=\"' + decodeEntities(recherches_courantes[index].url) + '\" target=\"_blank\">' + decodeEntities(recherches_courantes[index].titre) +'</a><span class=\"date_news\">' +
-     decodeEntities(recherches_courantes[index].date) + '</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>');
-  });
+
+  for (var index in recherches_courantes) {
+      //console.log(recherches_courantes[index]);
+      $('#resultats').html($('#resultats').html() + '<p class=\"titre_result\"><a class=\"titre_news\" href=\"' + decodeEntities(recherches_courantes[index].url) + '\" target=\"_blank\">' + decodeEntities(recherches_courantes[index].titre) +'</a><span class=\"date_news\">' + decodeEntities(recherches_courantes[index].date) + '</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>');
+  }
+
 }
 
 view.init = function() {
   var recherches = model.get_cookie_recherche();
-  console.log(recherches);
+  //console.log(recherches);
   for (var index in recherches) {
     view.ajouter_recherche(recherches[index]);
   }
@@ -94,7 +92,5 @@ view.sauver_nouvelle = function(e) {
 view.creerNouvelle = function(e) {
   var url = $(e).parent().find("a");
 	var date = $(e).parent().find(".date_news").html();
-	return {titre : url.html(),
-			url : url.attr("href"),
-			date : date};
+	return {titre : url.html(), url : url.attr("href"), date : date};
 }

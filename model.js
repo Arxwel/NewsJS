@@ -26,7 +26,7 @@ model.init = function ()
 model.selectionner_recherche = function(recherche) {
     model.recherche_courante = recherche;
     if($.cookie(model.recherche_courante) != "") {
-  		model.recherche_courante_news = $.cookie(model.recherche_courante);
+  		model.recherche_courante_news = JSON.parse($.cookie(model.recherche_courante));
     }
 }
 

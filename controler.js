@@ -3,7 +3,7 @@ var controller = {};
 controller.ajouter_recherche = function() {
 	if (model.recherches.indexOf(view.get_saisie()) == -1) {
 		view.ajouter_recherche(view.get_saisie());
-    model.ajouter_recherche(view.get_saisie());
+    	 model.ajouter_recherche(view.get_saisie());
 	}
 }
 
@@ -13,9 +13,9 @@ controller.supprimer_recherche = function(recherche) {
 }
 
 controller.selectionner_recherche = function(recherche) {
-  view.selectionner_recherche(recherche);
-  model.selectionner_recherche(view.get_text_label(recherche));
-  view.afficher_nouvelles_sauvegardees(recherche);
+  view.selectionner_recherche($(recherche).html());
+  model.selectionner_recherche($(recherche).html());
+  view.afficher_nouvelles_sauvegardees();
 }
 
 controller.init = function() {
