@@ -94,3 +94,13 @@ view.creerNouvelle = function(e) {
 	var date = $(e).parent().find(".date_news").html();
 	return {titre : url.html(), url : url.attr("href"), date : date};
 }
+
+view.autocomplete = function() {
+    $("#zone_saisie").autocomplete({
+        source: model.get_cookie_recherche(),
+        select: function(event,ui) {
+            $("#zone_saisie").val($("#zone_saisie").val() + ui.item.value)
+        },
+        position: {my:"center bottom", at: "center top", within: $("#nouvelle-recherche"), collision:"flip flip"}
+    });
+}

@@ -19,6 +19,7 @@ controller.selectionner_recherche = function(recherche) {
 }
 
 controller.init = function() {
+	controller.autocomplete();
 	model.init();
 	view.init();
 }
@@ -40,4 +41,20 @@ controller.supprimer_nouvelle = function(nouvelle) {
 controller.sauver_nouvelle = function(e) {
 	view.sauver_nouvelle(e);
 	model.sauver_nouvelle(view.creerNouvelle(e));
+}
+
+controller.ecoute_clavier = function(event) {
+	if (event.key == "Enter") {
+		controller.rechercher_nouvelles();
+	} else if (event.ctrlKey || event.metaKey) {
+		if(String.fromCharCode(event.which).toLowerCase() == 's') {
+			event.preventDefault();
+			controller.ajouter_recherche();
+		}
+	}
+}
+
+controller.autocomplete = function() {
+	view.autocomplete();
+	controller.rechercher_nouvelles();
 }
