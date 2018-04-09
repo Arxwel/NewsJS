@@ -66,3 +66,9 @@ controller.accordeon = function() {
         action :false
     });
 }
+
+/*
+controller.orderDate = function() {
+	view.orderDate();
+}
+*/

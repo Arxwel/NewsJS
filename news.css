@@ -167,6 +167,6 @@ input[type="text"]
     border-radius: 10px;
 }
 
-#accordeon .titre .ui-state-active::after {
-	content: "^";
+#boutons-ordonnes {
+	text-align: center;
 }

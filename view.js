@@ -1,5 +1,17 @@
 var view ={};
 
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if(property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function (a,b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
 view.ajouter_recherche = function(saisie)
 {
   $("#recherches-stockees").html($("#recherches-stockees").html() + '<p class=\"titre-recherche\"><label onclick=\"controller.selectionner_recherche(this)\">' + saisie + '</label><img src=\"croix30.jpg\" class=\"icone-croix\" onclick=\"controller.supprimer_recherche(this)\"/> </p>');
@@ -75,10 +87,11 @@ view.maj_resultats = function(res) {
   $('#wait').css("display", "none");
 	var tableau = JSON.parse(res);
 	$.each(tableau, function(index, value) {
+    console.log(decodeEntities(tableau[index].date));
 		if(indexOf(model.get_recherches_courantes_news(),{titre:decodeEntities(tableau[index].titre), date:format(decodeEntities(tableau[index].date))}) == -1) {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"controller.sauver_nouvelle(this)\"><img src=\"horloge15.jpg\"/></span></p>");
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + format(decodeEntities(tableau[index].url)) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + decodeEntities(tableau[index].date) + "</span><span class=\"action_news\" onclick=\"controller.sauver_nouvelle(this)\"><img src=\"horloge15.jpg\"/></span></p>");
 		} else {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>");
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + format(decodeEntities(tableau[index].url)) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + decodeEntities(tableau[index].date)  + "</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>");
 		}
 	});
 }
@@ -104,3 +117,20 @@ view.autocomplete = function() {
         position: {my:"center bottom", at: "center top", within: $("#nouvelle-recherche"), collision:"flip flip"}
     });
 }
+
+/*
+view.orderDate = function() {
+	var res= [];
+  $("#resultats p").each( function () {
+    console.log($(this).find(".date_news").html());
+		res.push({url : $(this).find(".titre_news").attr("href"),
+						titre : $(this).find(".titre_news").html(),
+						date : $(this).find(".date_news").html()
+					});
+	});
+  console.log(res);
+  res.sort(dynamicSort("date"));
+	$("#resultats").empty();
+	view.maj_resultats(JSON.stringify(res));
+}
+*/
