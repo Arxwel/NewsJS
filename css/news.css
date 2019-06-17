@@ -3,7 +3,7 @@ body
 	font-family: "Verdana", Georgia, Serif;
 	margin:auto;
 	width:1000px;
-	background-image: url(search30.png);
+	background-image: url('../images/search30.png');
 	background-repeat : no-repeat;
 	background-size: cover;
 	background-position: center center;
@@ -66,8 +66,8 @@ body
 	display:none;
 	height:500px;
 	width:100%;
-	background-image: url(loader.gif);
-	background-repeat : no-repeat;
+	background-image: url('../images/loader.gif');
+	background-repeat : no-repeat;'
 	background-position: center center;
 }
 
@@ -161,10 +161,10 @@ input[type="text"]
 }
 
 #accordeon .titre {
-    background: black;
-    color: white;
-    font-weight: bold;
-    border-radius: 10px;
+	background: black;
+	color: white;
+	font-weight: bold;
+	border-radius: 10px;
 }
 
 #boutons-ordonnes {

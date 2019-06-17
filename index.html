@@ -3,11 +3,11 @@
 <head>
 	<title>My News</title>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" media="screen" href="jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" media="screen" href="news.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/news.css">
 </head>
 <body onload="controller.init()">
-	<h1 class="nom"> <img id="banniere" src="job.png"/> </h1>
+	<h1 class="nom"> <img id="banniere" src="images/job.png"/> </h1>
 	<div id="recherches">
 		<div id="accordeon">
 			<h3 class="titre"> recherches stockées</h3>
@@ -17,29 +17,23 @@
 		<h3 class="titre">nouvelle recherche</h3>
 		<div id="nouvelle-recherche">
 			<input type="text" name="zone_saisie" id="zone_saisie" onkeydown="controller.ecoute_clavier(event)"/>
-			<img class="icone-disk" src="disk30.jpg" onclick="controller.ajouter_recherche()" />
+			<img class="icone-disk" src="images/disk30.jpg" onclick="controller.ajouter_recherche()" />
 			<BR/>
 			<input type="button" value="OK" onclick="controller.rechercher_nouvelles()"/>
 		</div>
 	</div>
 	<div id="zone-centrale">
-		<!--
-		<div id="boutons-ordonnes">
-			<p>Ordonner les nouvelles</p>
-			<button onclick="controller.orderDate()">Par date</button>
-		</div>
-	-->
 		<div id="resultats-container">
 			<h3 class="titre">résultats</h3>
 			<div id="wait"></div>
 			<div id="resultats"></div>
 		</div>
-	<script src="jquery-3.2.1.js"></script>
-	<script src="jquery-ui.js"></script>
-    <script src="jquery.cookie.js"></script>
-	<script src="util.js"></script>
-	<script src="controler.js"></script>
-	<script src="view.js"></script>
-	<script src="model.js"></script>
-</body>
-</html>
+		<script src="js/jquery-3.2.1.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/controler.js"></script>
+		<script src="js/view.js"></script>
+		<script src="js/model.js"></script>
+	</body>
+	</html>

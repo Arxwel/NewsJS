@@ -14,12 +14,12 @@ function dynamicSort(property) {
 
 view.ajouter_recherche = function(saisie)
 {
-  $("#recherches-stockees").html($("#recherches-stockees").html() + '<p class=\"titre-recherche\"><label onclick=\"controller.selectionner_recherche(this)\">' + saisie + '</label><img src=\"croix30.jpg\" class=\"icone-croix\" onclick=\"controller.supprimer_recherche(this)\"/> </p>');
+  $("#recherches-stockees").html($("#recherches-stockees").html() + '<p class=\"titre-recherche\"><label onclick=\"controller.selectionner_recherche(this)\">' + saisie + '</label><img src=\"images/croix30.jpg\" class=\"icone-croix\" onclick=\"controller.supprimer_recherche(this)\"/> </p>');
 }
 
 view.supprimer_nouvelle = function(element)
 {
-  $(element).find("img").attr("src","horloge15.jpg");
+  $(element).find("img").attr("src","images/horloge15.jpg");
   $(element).attr("onclick", "controller.sauver_nouvelle(this)");
 }
 
@@ -49,9 +49,9 @@ view.maj_resultats = function(res) {
 
 	$.each(tableau, function(index, value) {
 		if(indexOf(model.get_recherches_courantes_news(),{titre:decodeEntities(tableau[index].titre), date:format(decodeEntities(tableau[index].date))}) == -1) {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"controller.sauver_nouvelle(this)\"><img src=\"horloge15.jpg\"/></span></p>");
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"controller.sauver_nouvelle(this)\"><img src=\"images/horloge15.jpg\"/></span></p>");
 		} else {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>");
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + decodeEntities(tableau[index].url) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + format(decodeEntities(tableau[index].date)) + "</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"images/disk15.jpg\"/></span></p>");
 		}
 	});
 }
@@ -65,7 +65,7 @@ view.afficher_nouvelles_sauvegardees = function() {
 
   for (var index in recherches_courantes) {
       //console.log(recherches_courantes[index]);
-      $('#resultats').html($('#resultats').html() + '<p class=\"titre_result\"><a class=\"titre_news\" href=\"' + decodeEntities(recherches_courantes[index].url) + '\" target=\"_blank\">' + decodeEntities(recherches_courantes[index].titre) +'</a><span class=\"date_news\">' + decodeEntities(recherches_courantes[index].date) + '</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>');
+      $('#resultats').html($('#resultats').html() + '<p class=\"titre_result\"><a class=\"titre_news\" href=\"' + decodeEntities(recherches_courantes[index].url) + '\" target=\"_blank\">' + decodeEntities(recherches_courantes[index].titre) +'</a><span class=\"date_news\">' + decodeEntities(recherches_courantes[index].date) + '</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"images/disk15.jpg\"/></span></p>');
   }
 
 }
@@ -89,16 +89,16 @@ view.maj_resultats = function(res) {
 	$.each(tableau, function(index, value) {
     console.log(decodeEntities(tableau[index].date));
 		if(indexOf(model.get_recherches_courantes_news(),{titre:decodeEntities(tableau[index].titre), date:format(decodeEntities(tableau[index].date))}) == -1) {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + format(decodeEntities(tableau[index].url)) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + decodeEntities(tableau[index].date) + "</span><span class=\"action_news\" onclick=\"controller.sauver_nouvelle(this)\"><img src=\"horloge15.jpg\"/></span></p>");
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + format(decodeEntities(tableau[index].url)) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + decodeEntities(tableau[index].date) + "</span><span class=\"action_news\" onclick=\"controller.sauver_nouvelle(this)\"><img src=\"images/horloge15.jpg\"/></span></p>");
 		} else {
-			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + format(decodeEntities(tableau[index].url)) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + decodeEntities(tableau[index].date)  + "</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"disk15.jpg\"/></span></p>");
+			$('#resultats').html($('#resultats').html() + "<p class=\"titre_result\"><a class=\"titre_news\" href=\"" + format(decodeEntities(tableau[index].url)) + "\" target=\"_blank\">" + decodeEntities(tableau[index].titre) +"</a><span class=\"date_news\">" + decodeEntities(tableau[index].date)  + "</span><span class=\"action_news\" onclick=\"controller.supprimer_nouvelle(this)\"><img src=\"images/disk15.jpg\"/></span></p>");
 		}
 	});
 }
 
 view.sauver_nouvelle = function(e) {
   var parent = $(e).parent();
-	$(e).children(":first").attr("src", "disk15.jpg");
+	$(e).children(":first").attr("src", "images/disk15.jpg");
 	$(e).attr("onclick", "controller.supprimer_nouvelle(this)");
 }
 
